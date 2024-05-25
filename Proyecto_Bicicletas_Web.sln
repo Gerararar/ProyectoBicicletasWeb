@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34525.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proyecto_Bicicletas_Web", "Proyecto_Bicicletas_Web\Proyecto_Bicicletas_Web.csproj", "{FBAEAFBE-CD5D-4F92-9536-B58BE1D5F146}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proyecto_Bicicletas_Web.Client", "Proyecto_Bicicletas_Web.Client\Proyecto_Bicicletas_Web.Client.csproj", "{9F92114C-6D40-48EE-AB0A-9A146DF32678}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FBAEAFBE-CD5D-4F92-9536-B58BE1D5F146}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBAEAFBE-CD5D-4F92-9536-B58BE1D5F146}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBAEAFBE-CD5D-4F92-9536-B58BE1D5F146}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBAEAFBE-CD5D-4F92-9536-B58BE1D5F146}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F92114C-6D40-48EE-AB0A-9A146DF32678}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F92114C-6D40-48EE-AB0A-9A146DF32678}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F92114C-6D40-48EE-AB0A-9A146DF32678}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F92114C-6D40-48EE-AB0A-9A146DF32678}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {05392923-FDDE-463F-ABD9-168DB47E3139}
+	EndGlobalSection
+EndGlobal
