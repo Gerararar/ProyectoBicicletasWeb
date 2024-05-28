@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Proyecto_Bicicletas_Web.Components;
 using Proyecto_Bicicletas_Web.Components.Account;
 using Proyecto_Bicicletas_Web.Data;
+using Proyecto_Bicicletas_Web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,6 +36,7 @@ builder.Services.AddIdentityCore<ApplicationUser>(options => options.SignIn.Requ
     .AddDefaultTokenProviders();
 
 builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();
+builder.Services.AddScoped<IProductos, ProductosService>();
 
 var app = builder.Build();
 

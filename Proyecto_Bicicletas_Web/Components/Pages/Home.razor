@@ -1,7 +1,47 @@
 ﻿@page "/"
+@using Proyecto_Bicicletas_Web.Services
+@using Proyecto_Bicicletas_Web.Models
+@inject IProductos Iproducto
 
-<PageTitle>Home</PageTitle>
+@rendermode InteractiveServer
+@if (productos != null && productos.Count > 0)
+{
+    <div class="container text-center">
+        <div class="row">
+            <!-- for each-->
+            @foreach (var producto in productos)
+            {
+            <div class="col col-sm-6">
+                <div class="card" style="width: 18rem;">
+                    <h5 class="card-title">@producto.Nombre</h5>
+                    <img src="@producto.Imagen" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p class="card-text">Descripcion</p>
+                        <p class="card-text">@producto.Descripcion</p>
+                        <p class="card-text">Precio</p>
+                        <p class="card-text">@producto.Precio</p>
+                        <a href="@producto.Link" class="btn btn-primary">Link</a>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+}
+else
+{
+  <div class="alert alert-warning" role="alert">
+  <h4 class="alert-heading">Error al cargar la Base de datos</h4>
+  <p>La Lista de productos se encuentra vacia o es nula</p>
+  <hr>
+  <p class="mb-0">Recargue la pagina o intente mas tarde</p>
+</div> 
+}
+@code{
+    List<Productos> productos = new List<Productos>();
 
-<h1>Hello, world!</h1>
-
-Welcome to your new app.
+    protected override async Task OnInitializedAsync()
+     {
+         productos = await Iproducto.ObtenerProductos();
+     }
+}

@@ -6,24 +6,40 @@ namespace Proyecto_Bicicletas_Web.Services
 {
     public class ProductosService(ApplicationDbContext context) : IProductos
     {
-        Task IProductos.BorrarProducto(int id)
+        public async Task<Productos> AgregarProducto(Productos producto) {
+            context.Productos.Add(producto);
+            await context.SaveChangesAsync();
+            return producto;
+        }
+        
+        public async Task BorrarProducto(int id)
         {
-            throw new NotImplementedException();
+            var cita = await context.Productos.FindAsync(id);
+            if (cita != null)
+            {
+                context.Productos.Remove(cita);
+                await context.SaveChangesAsync();
+            }
         }
 
-        Task<Productos> IProductos.ModificarProducto(Productos producto)
+        public async Task<Productos> ModificarProducto(Productos producto)
         {
-            throw new NotImplementedException();
+            context.Productos.Update(producto);
+            await context.SaveChangesAsync();
+            return producto;
         }
 
-        Task<Productos> IProductos.ObtenerProducto(int id)
+        public async Task<Productos> ObtenerProducto(int id)
         {
-            throw new NotImplementedException();
+            var producto = await context.Productos.FindAsync(id);
+            return producto;
         }
-
-        Task<List<Productos>> IProductos.ObtenerProductos()
+        
+        public async Task<List<Productos>> ObtenerProductos()
         {
-            throw new NotImplementedException();
+            List<Productos> products = new List<Productos>();
+            products = await context.Productos.ToListAsync();
+            return products;
         }
     }
 }
