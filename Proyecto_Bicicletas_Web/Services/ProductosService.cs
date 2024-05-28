@@ -14,10 +14,10 @@ namespace Proyecto_Bicicletas_Web.Services
         
         public async Task BorrarProducto(int id)
         {
-            var cita = await context.Productos.FindAsync(id);
-            if (cita != null)
+            var producto = await context.Productos.FindAsync(id);
+            if (producto != null)
             {
-                context.Productos.Remove(cita);
+                context.Productos.Remove(producto);
                 await context.SaveChangesAsync();
             }
         }

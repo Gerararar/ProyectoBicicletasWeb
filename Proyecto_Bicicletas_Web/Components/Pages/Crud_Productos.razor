@@ -2,7 +2,7 @@
 @using Proyecto_Bicicletas_Web.Services
 @using Proyecto_Bicicletas_Web.Models
 @inject IProductos Iproducto
-
+@rendermode InteractiveServer
 <div>
     <div class="row">
         <div class=" col col-sm-6">
@@ -16,22 +16,37 @@
             </div>
         </div>
     </div>
-    <div class="col col-sm-6">
+    @if (list_prod != null && list_prod.Count > 0)
+    {
+        <div class="col col-sm-6">
+            @foreach (var producto in list_prod)
+            {
             <div class="list-group">
-            <a href="#" class="list-group-item list-group-item-success" aria-current="true">
-                <div class="container">
-                    <h5 class="mb-3">producto.Nombre</h5>
-                    <img src="https://e1.pngegg.com/pngimages/555/986/png-clipart-media-filetypes-jpg-icon-thumbnail.png mb-3" width="30" height="24">
-                </div>
-                    <p class="mb-3">Precio producto.Precio</p>
-                    <small>producto.Descripcion</small>
+                <a class="list-group-item list-group-item-success" aria-current="true">
+                    <div class="container">
+                        <h5 class="mb-3">@producto.Nombre</h5>
+                        <img src="@producto.Imagen " width="30" height="24">
+                    </div>
+                    <p class="mb-3">Precio @producto.Precio</p>
+                    <small>@producto.Descripcion</small>
                     <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                         <button type="button" class="btn btn-danger">Borrar</button>
                         <button type="button" class="btn btn-warning">Modificar</button>
                     </div>
                 </a>
+            </div>
+            }
         </div>
-    </div>
+    }
+    else
+    {
+        <div class="alert alert-warning" role="alert">
+            <h4 class="alert-heading">Error al cargar la Base de datos</h4>
+            <p>La Lista de productos se encuentra vacia o es nula</p>
+            <hr>
+            <p class="mb-0">Recargue la pagina o intente mas tarde</p>
+        </div>
+    }
 </div>
 
 @code {
@@ -42,4 +57,5 @@
     {
         list_prod = await Iproducto.ObtenerProductos();
     }
+
 }
