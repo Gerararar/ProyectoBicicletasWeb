@@ -1,5 +1,19 @@
-﻿<h3>Modificar</h3>
+﻿@page "/modificar/{id:int}"
+@using Proyecto_Bicicletas_Web.Services
+@using Proyecto_Bicicletas_Web.Models
+@inject IProductos Iproducto
+@rendermode InteractiveServer
+@inject NavigationManager navigation
+
+
 
 @code {
+    [Parameter]
+    public int id { get; set; }
+    Productos productos = new Productos();
 
+    protected override async Task OnInitializedAsync()
+    {
+        productos = await Iproducto.ObtenerProducto(id);
+    }
 }

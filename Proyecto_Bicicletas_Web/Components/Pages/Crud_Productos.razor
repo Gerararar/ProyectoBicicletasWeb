@@ -2,36 +2,49 @@
 @using Proyecto_Bicicletas_Web.Services
 @using Proyecto_Bicicletas_Web.Models
 @inject IProductos Iproducto
-@rendermode InteractiveServer
+@inject NavigationManager navigation
+@rendermode InteractiveAuto
+<!--rendermode InteractiveServer-->
+
 <div>
-    <div class="row">
-        <div class=" col col-sm-6">
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-            </div>
-            <div class="mb-3">
-                <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-            </div>
+    <form class="row md-6">
+        <div class="col-md-6">
+            <label class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="Nombre1" @bind="producto.Nombre">
         </div>
-    </div>
+        <div class="col-md-6">
+            <label class="form-label">Url Imagen</label>
+            <input type="url" class="form-control" id="Imagen1" @bind="producto.Imagen">
+        </div>
+        <div class="col-6">
+            <label for="inputAddress" class="form-label">Address</label>
+            <input type="url" class="form-control" id="Link1" @bind="producto.Link">
+        </div>
+        <div class="col-md-2">
+            <label for="inputZip" class="form-label">Precio</label>
+            <input type="text" class="form-control" id="precio" @bind-value="producto.Precio">
+        </div>
+        <div class="col-2">
+            <button type="submit" class="btn btn-primary">Agregar</button>
+        </div>
+    </form>
+    <h3>Productos Actuales</h3>
     @if (list_prod != null && list_prod.Count > 0)
     {
         <div class="col col-sm-6">
-            @foreach (var producto in list_prod)
+            @foreach (var product in list_prod)
             {
             <div class="list-group">
                 <a class="list-group-item list-group-item-success" aria-current="true">
                     <div class="container">
-                        <h5 class="mb-3">@producto.Nombre</h5>
-                        <img src="@producto.Imagen " width="30" height="24">
+                            <h5 class="mb-3">@product.Nombre</h5>
+                            <img src="@product.Imagen " width="30" height="24">
                     </div>
-                    <p class="mb-3">Precio @producto.Precio</p>
-                    <small>@producto.Descripcion</small>
+                        <p class="mb-3">Precio @product.Precio</p>
+                        <small>@product.Descripcion</small>
                     <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                        <button type="button" class="btn btn-danger">Borrar</button>
-                        <button type="button" class="btn btn-warning">Modificar</button>
+                            <button type="button" class="btn btn-danger" onclick="() => Borrar(@product.Id)">Borrar</button>
+                            <button type="button" class="btn btn-warning" onclick="() => Modificar(@product.Id)">Modificar</button>
                     </div>
                 </a>
             </div>
@@ -53,6 +66,16 @@
     List<Productos> list_prod = new List<Productos>();
     Productos producto = new Productos();
 
+    async void Borrar(int id)
+    {
+        await Iproducto.BorrarProducto(id);
+        list_prod = await Iproducto.ObtenerProductos();
+        StateHasChanged();
+    }
+    async void Modificar(int id)
+    {
+        navigation.NavigateTo($"/modificar/{id}");
+    }
     protected override async Task OnInitializedAsync()
     {
         list_prod = await Iproducto.ObtenerProductos();
