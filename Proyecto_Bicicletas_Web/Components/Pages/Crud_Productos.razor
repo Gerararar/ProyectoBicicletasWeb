@@ -7,7 +7,7 @@
 <!--rendermode InteractiveServer-->
 
 <div>
-    <form class="row md-6">
+    <form class="row md-6" OnValidSubmit="Registro">
         <div class="col-md-6">
             <label class="form-label">Nombre</label>
             <input type="text" class="form-control" id="Nombre1" @bind="producto.Nombre">
@@ -80,5 +80,10 @@
     {
         list_prod = await Iproducto.ObtenerProductos();
     }
-
+    async void Registro()
+    {
+        var respuesta = await Iproducto.AgregarProducto(producto);
+        list_prod = await Iproducto.ObtenerProductos();
+        StateHasChanged();
+    }
 }
